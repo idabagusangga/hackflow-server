@@ -12,6 +12,7 @@ require('dotenv').config()
 var users = require('./routes/users');
 const questions = require('./routes/questions')
 const answers = require('./routes/answers')
+const scheduler = require('./helper/cronjob')
 
 var app = express();
 
@@ -28,7 +29,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 console.log('MLABS Connected');
 });
-
+scheduler.start()
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(cors())
